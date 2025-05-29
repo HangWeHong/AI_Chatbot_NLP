@@ -26,7 +26,10 @@ def chat_with_bot(input):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     response_json = response.json()
-    print(f"Bot: {response_json["data"]["messageList"][0]['content'][0]["text"]}")
+    try:
+        return response_json['data']['messageList'][0]['content'][0]['text']
+    except:
+        return "Sorry, something went wrong with the bot response."
 
 if __name__ == "__main__":
     

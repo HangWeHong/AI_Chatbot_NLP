@@ -6,16 +6,15 @@ import os
 load_dotenv()
 
 
-def chat_with_bot(input):
+def chat_with_bot(input, history):
     url = "https://ibotservice.alipayplus.com/almpapi/v1/message/chat"
-
     payload = json.dumps({
     "stream": False,
     "botId": os.getenv("BOT_ID"),
     "bizUserId": "xxxx",
     "token": os.getenv("API_KEY"),
     "chatContent": {
-        "text": input,
+        "text": collect_history(history) + input ,
         "contentType": "TEXT"
     }
     })
@@ -30,6 +29,18 @@ def chat_with_bot(input):
         return response_json['data']['messageList'][0]['content'][0]['text']
     except:
         return "Sorry, something went wrong with the bot response."
+
+def collect_history(history):
+    if history is None or len(history) == 0:
+        return ""
+    history_text = "## History Conversation:\n"
+    for item in history:
+        if item['role'] == 'user':
+            history_text += f"User: {item['content']}\n"
+        elif item['role'] == 'assistant':
+            history_text += f"Assistant: {item['content']}\n"
+        
+    return history_text.strip()
 
 if __name__ == "__main__":
     

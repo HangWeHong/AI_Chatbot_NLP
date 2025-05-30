@@ -1,3 +1,6 @@
 .venv/
+~/
 
 .env
+
+knowledge_base/data/

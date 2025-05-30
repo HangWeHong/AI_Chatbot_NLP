@@ -1,9 +1,18 @@
 import gradio as gr
 from agent.chatbot import chat_with_bot
 
+custom_theme = gr.themes.Base(
+    primary_hue="blue", secondary_hue="gray", neutral_hue="blue"
+).set(
+    body_background_fill="#e6f0ff",
+    button_primary_background_fill="#004eaa",
+    button_primary_text_color="white",
+    block_background_fill="white",
+    border_color_primary="#004eaa",
+)
 
 with gr.Blocks(
-    theme=gr.themes.Base(primary_hue="blue", secondary_hue="indigo"),
+    theme=custom_theme,
     css="""
         #title-text {
             text-align: center;
@@ -31,9 +40,19 @@ with gr.Blocks(
             background: inherit;
             flex: 1;
         }        
+        .input-container {
+            gap: 10px;
+        }
     """,
 ) as app:
-    gr.Image("assets/tng_logo.jpg", height=80, show_label=False)
+    gr.Image(
+        "assets/tng_logo.jpg",
+        height=80,
+        show_label=False,
+        container=False,
+        show_fullscreen_button=False,
+        show_download_button=False,
+    )
     gr.Markdown("# 🟦 Touch 'n Go - FAQ Chatbot", elem_id="title-text")
     gr.Markdown(
         "💬 Ask any question about Touch 'n Go eWallet, tolls, payments, and more!",

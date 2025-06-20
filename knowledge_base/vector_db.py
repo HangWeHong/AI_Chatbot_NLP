@@ -67,8 +67,9 @@ class BgeM3EmbeddingFunction(EmbeddingFunction):
         self._embedding_function = OllamaEmbeddings(model="bge-m3")
 
     def __call__(self, input: Documents) -> Embeddings:
-        return self._embedding_function.embed_documents(input)
-    
+        embedding = self._embedding_function.embed_documents(input)
+        # print(f"Original Text:\n{input}\n\nEmbedding:\n{embedding}")
+        return embedding
 
     
 if __name__ == "__main__":

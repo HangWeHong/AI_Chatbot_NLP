@@ -1,5 +1,5 @@
 import gradio as gr
-from agent.chatbot import chat_with_bot
+from agent.chatbot import chatbot_workflow
 
 custom_theme = gr.themes.Base(
     primary_hue="blue", secondary_hue="gray", neutral_hue="blue"
@@ -60,7 +60,7 @@ with gr.Blocks(
     )
 
     gr.ChatInterface(
-        fn=chat_with_bot,
+        fn=chatbot_workflow,
         chatbot=gr.Chatbot(elem_id="chatbot", type="messages", container=True),
         textbox=gr.Textbox(
             placeholder="Ask me about Touch 'n Go services...",

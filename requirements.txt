@@ -4,3 +4,5 @@ gradio
 openpyxl
 chromadb
 langchain_ollama
+langchain_openai
+ragas
